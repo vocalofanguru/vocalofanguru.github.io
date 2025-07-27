@@ -1,0 +1,612 @@
+       @font-face {
+  font-family: 'Delius';
+  src: url('./fonts/Delius-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+ 
+ * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: linear-gradient(135deg, #ffafcc, #ffc8dd);
+  padding: 10px 20px;
+  border-bottom: 4px solid #ff70a6;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header h1 {
+  margin: 0;
+  font-size: 2.8em;
+  color: #6a1b4d;
+  text-shadow: 1px 1px 0 #fff;
+  font-family: 'Delius', sans-serif;
+}
+
+.FS-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+header button {
+  padding: 8px 14px;
+  border: none;
+  background-color: #ff70a6;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+}
+/* Navigation bar */
+nav {
+  position: fixed;
+  top: 70px;               /* Adjust based on header height */
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: #ffe5ec;
+  padding: 15px 0;
+  display: flex;
+  justify-content: flex-end;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+nav ul {
+
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+}
+
+/* Buttons */
+nav button {
+  font-family: 'Delius', sans-serif;
+  background: #ff8fab;
+  border: none;
+  padding: 12px 25px;
+  font-size: 1em;
+  color: white;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(255, 143, 171, 0.3);
+  position: relative;
+  overflow: hidden;
+  
+}
+
+/* Hover effect */
+nav button:hover {
+  background: #ff5d8f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 93, 143, 0.3);
+}
+
+
+nav button:active {
+  transform: scale(0.97);
+}
+
+nav button::after {
+  content: "";
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  width: 0%;
+  height: 2px;
+  background-color: white;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+nav button:hover::after {
+  width: 60%;
+  left: 20%;
+}
+
+
+.page{width:100%;
+  height:2000px;
+text-align: center;
+  padding-top: 130px; /* so that header and nav wont overlap*/}
+
+
+nav ul li{display:inline;}
+
+
+#page1{background:rgb(35, 35 35)}
+#page2{background:rgb(35, 35 35)}
+#page3{background:rgb(35, 35 35)}
+
+section {
+  background-color: #f5f5f5;
+
+}
+
+h1, div  {
+  color:#212121;
+  font-family: 'Delius';
+}
+
+.bannerWrapper {
+  position: relative;
+  display: inline-block; /* or block, depending on layout */
+min-width: 100%;
+}
+
+.bannerphoto {
+  display: block;
+  min-width: 100%; /* or a fixed size */
+  height: 400px;
+  filter: brightness(50%); 
+}
+
+.inBanner {
+  position: absolute;
+  top: 20%; /* vertical position */
+  left: 50%; /* move to center point of the container */
+  transform: translateX(-50%); /* shift left by half its own width */
+  
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.gap {height: 100px;}
+
+
+/*
+***********SECTION 1 CSS*************
+*/
+
+.box {
+  background-color: rgba(240, 248, 255, 0.3); 
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.2em;
+  line-height: 1.6;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.card {
+  width: 300px;
+  height: 400px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+}
+
+.card.flip .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.card-front {
+  background: #ffe0e6;
+  color: #4a0033;
+}
+
+.card-back {
+  background: #f8b3cc;
+  color: #2b001c;
+  transform: rotateY(180deg);
+}
+
+
+
+.breedgrid {
+  background-color: greenyellow;
+  width: 50%;
+  height: 700px
+}
+
+.headers {
+  font-size: 2.5em;
+  padding-top: 40px;
+  padding-bottom: 50px;
+}
+
+.breedGrid {
+  display: grid;
+  grid-template-columns: repeat(2, auto); /* shrink to content width */
+  grid-template-rows: repeat(6, auto);    /* optional */
+  gap: 20px;  
+  place-items: start center; /* vertically start, horizontally center */
+  margin: 0 auto;            /* center the grid itself */
+  padding: 20px;
+  max-width: 1000px;  
+  justify-content: center;   
+}
+    
+#breedButtonContainer {
+    grid-row: span 2 / span 2;
+  margin-left: -500px;
+  min-height: 110px;
+  
+}
+
+#breedButtonContainer button {
+  padding: 0;
+  border: none;
+  background: none;
+  border: 2px solid #ffc5b5;
+  width: 100px;
+  height: 50px;
+}
+
+#breedButtonContainer button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+}
+
+#breedButtonContainer button:hover {
+
+  border: 4px solid #ff0000;
+  transition: all 0.3s ease;
+}
+
+
+#imgContainer {
+    position: relative;
+    grid-row: span 6 / span 6;
+}
+
+.breedImage {
+  height: 500px;
+  width: 375px;
+  border-radius: 10px;
+  border: 5px solid #1c2963;
+  margin-left: 100px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(50px);
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.breedImage.visible {
+  opacity: 1;
+  visibility: visible;
+ transform: translateX(0);
+}
+
+
+#breedContentContainer {
+  margin-left: -500px;
+    grid-row: span 4 / span 4;
+    grid-row-start: 3;
+    background-color: #f7f3f3;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width:500px;
+    min-height: 400px;
+}
+
+#breedContentContainer div {
+  font-size: 1.2em;
+
+}
+
+
+.whichbreed {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 8px;
+}
+    
+.whichbreed1 {
+    grid-column: span 2 / span 2;
+    grid-row: span 6 / span 6;
+    grid-column-start: 2;
+    grid-row-start: 1;
+    border-radius: 10px;
+    border: 5px solid #1c2963;
+    min-height: 100%;
+}
+
+.whichbreed2 {
+    grid-row: span 3 / span 3;
+    grid-column-start: 1;
+    grid-row-start: 1;
+        border: 5px solid #1c2963;
+        min-height: 100%;
+}
+
+.whichbreed3 {
+    grid-row: span 3 / span 3;
+    grid-column-start: 4;
+    grid-row-start: 4;
+        border: 5px solid #1c2963;
+        min-height: 100%;
+}
+ 
+
+#game-container {
+ 
+  max-width: 400px;
+  min-height: 600px;
+  margin: 50px auto;
+  position: relative;
+  background: linear-gradient( #4899fb, #d4dff6);
+  overflow: hidden;
+  border: 4px solid #333;
+}
+
+#bird {
+  position: absolute;
+  left: 80px;
+  top: 250px;
+
+}
+
+#bird img {
+  width: 40px;
+  height: 40px;
+}
+.pipe {
+  position: absolute;
+  width: 60px;
+background: linear-gradient(90deg, green, #66ff8f , green);
+
+}
+
+
+#score {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  z-index: 99;
+}
+
+
+#start-screen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url(Images/PCFTitle.png);
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+  z-index: 100;
+}
+
+
+#start-button {
+  margin-top: 290px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: #ff70a6;
+  border: 5px solid #ed4279;
+  border-radius: 6px;
+  color: white;
+  font-family: 'Delius', sans-serif;
+}
+
+#start-button:hover {
+  background-color: #ff3f8d;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 2rem;
+  z-index: 99;
+}
+
+#restart-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#restart-button:hover {
+  background-color: #218838;
+}
+
+.fade-in-section {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media screen and (max-width: 800px) {
+ header {
+    flex-direction: row;           /* Keep items in one row */
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;             /* Prevent stacking */
+  }
+
+  header h1 {
+    font-size: 1.8em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;                  /* Let it take up extra space */
+  }
+
+  .FS-buttons {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;                /* Prevent buttons from shrinking too much */
+  }
+
+  header button {
+    font-size: 0.9em;
+    padding: 6px 10px;
+  }
+}
+
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 0;
+  }
+
+  nav ul {
+    flex-direction: row;           /* force row */
+    flex-wrap: nowrap;             /* prevent wrapping */
+    overflow-x: auto;              /* scroll if needed */
+    white-space: nowrap;           /* prevent line break */
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;
+    max-width: 300px;
+  }
+
+  .breedGrid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  #breedButtonContainer {
+    margin-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  #breedContentContainer {
+    margin-left: 0;
+    width: 90%;
+    grid-row: auto;
+  }
+
+  #imgContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    width: 100%;
+  }
+
+  .breedImage {
+    width: 90%;
+    max-width: 300px;
+    margin-left: 0;
+    position: relative;
+    transform: none;
+  }
+
+  .whichbreed {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .whichbreed1,
+  .whichbreed2,
+  .whichbreed3 {
+    grid-column: auto;
+    grid-row: auto;
+    width: 90%;
+    margin: auto;
+  }
+
+  #game-container {
+   
+    max-width: 400px;
+
+    max-height: 600px;
+  }
+
+  #start-button {
+    margin-top: 100px;
+  }
+
+  .bannerphoto {
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .inBanner {
+    font-size: 1.5rem;
+    top: 30%;
+  }
+}
