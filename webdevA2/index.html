@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=no">
   <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="manifest" href="manifest.json" />
   <title>Pigs!</title>
   <link rel="stylesheet" href="fonts/Delius-Regular.ttf">
   <link rel="stylesheet" href="style.css">
@@ -58,7 +60,7 @@
                                       <div class="card-back">
                                         <h3>Cartoons</h3>
                                         <p>Found in Cartoons such as Peppa Pig as the Main focus!</p>
-                                                  <img src="Images/Peppa.png" alt="Peppa"  height="70%">
+                                                  <img src="Images/Peppa.png" alt="Peppa">
                                       </div>
                                     </div>
                                   </article>
@@ -72,7 +74,7 @@
                                       <div class="card-back">
                                         <h3>12th Zodiac</h3>
                                         <p>The pig is the 12th zodiac animal. It serves as the symbol of wealth!</p>
-                                        <img src="Images/PigZodiac.png" alt="zodiac"  height="70%">
+                                        <img src="Images/PigZodiac.png" alt="zodiac">
                                       </div>
 
                                     </div>
@@ -89,17 +91,19 @@
                                         <p>Especially known in the popular book Animal Farm. Although, These
                                           pigs are symbolism for the dictators' greed and dirt.
                                         </p>
-                                          <img src="Images/AnimalFarm.png" alt="AnimalFarm" height="70%">
+                                          <img src="Images/AnimalFarm.png" alt="AnimalFarm">
                                       </div>
                                     </div>
                                   </article>
                                 </section>
-                                 <h1 class="headers fade-in-section">Representation of Pigs in Media!                        </h1>
-                                <div class="box">
+                                 <h1 class="headers fade-in-section">
+                                  Interactive! 
+                                  </h1>
+                                <div class="box fade-in-section">
                                  <img src="Images/PigSnout.png" alt="pignose" id="Hoverpig">
                                  <h1>What do i sound like? Click Me!</h1>
                                 </div>
-                                <form id="pigquiz-form" class="pigquiz-form">
+                                <form id="pigquiz-form" class="pigquiz-form fade-in-section">
                                   <h2 class="pigquiz-title">How Many Stages Are in a Pig's Life Cycle?</h2>
 
                                   <label for="pigquiz-guess" class="pigquiz-label">Your Guess:</label>
@@ -108,8 +112,15 @@
                                   <button type="submit" class="pigquiz-button">Submit</button>
                                 </form>
 
-                                <div id="pigquiz-feedback" class="pigquiz-feedback"></div>
+                                <div id="pigquiz-feedback" class="pigquiz-feedback fade-in-section"></div>
 
+                                <div class="mobilepage">
+                                 <h1 class="headers fade-in-section">
+                                  QR Code to mobile page!
+                                 </h1>
+                                 <img src="Images/QRCode.png" class="fade-in-section" alt="QRCode">
+                                </div>
+                                
     </section>
 
  
@@ -213,7 +224,7 @@
 
     <section class="page " id="page3">
         <div class="bannerWrapper">
-            <img src="Images/pigBanner.png" class="bannerphoto">
+            <img src="Images/pigBanner.png" class="bannerphoto" alt="bannerphoto">
             <h1 class="inBanner">page 3 content</h1>
         </div>
                   <h1 class="headers"> Pigs are more than just meat! </h1>
@@ -225,12 +236,12 @@
 
      <section class="page" id="page4">
       <div class="bannerWrapper">
-            <img src="Images/pigBanner.png" class="bannerphoto">
+            <img src="Images/pigBanner.png" class="bannerphoto" alt="bannerphoto">
             <h1 class="inBanner">page 3 content</h1>
         </div>
                   <h1 class="headers fade-in-section"> "Pigs can't fly!" They said... </h1>
                     <div id="game-container">
-                      <div id="flyingpig"> <img src="Images/FlyPig.png"></div>
+                      <div id="flyingpig"> <img src="Images/FlyPig.png" alt="flyingpig"></div>
                       <div id="score">0</div>
                            <div id="start-screen">
                               <button id="start-button">Start Game</button>
@@ -267,13 +278,14 @@
                                 Are you able to live up to the renowned phrase!? Find out by playing NOW!!!!
                             </div>
                         </div>
-                            
-
-                
-
-
-
+  
      </section>
+     <footer class="pig-footer">
+  <div class="pig-footer-content">
+    <p>All About Pigs! © 2025</p>
+
+  </div>
+</footer>
   </main>
 </body>
 </html>

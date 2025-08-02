@@ -164,7 +164,7 @@ nav button:hover::after {
 
 
 .page{width:100%;
-  height:4000px;
+  height:100%;
   text-align: center;
   padding-top: 130px; /* so that header and nav wont overlap*/}
 
@@ -192,8 +192,9 @@ min-width: 100%;
 .bannerphoto {
   display: block;
   min-width: 100%; /* or a fixed size */
-  height: 400px;
+  height: 600px;
   filter: brightness(50%); 
+    object-fit: cover;
 }
 
 .inBanner {
@@ -274,6 +275,12 @@ min-width: 100%;
   transform: rotateY(180deg);
 }
 
+.card-back img {
+  max-width: 100%;
+  height: 70%;
+  object-fit: contain;
+}
+
 #Hoverpig img  {
  max-width:300px ;
 }
@@ -338,12 +345,13 @@ min-width: 100%;
 .pigquiz-feedback {
   text-align: center;
   font-size: 1.2em;
-  margin: 15px auto;         /* Center horizontally */
+  margin: auto;         /* Center horizontally */
   background-color: white;
   padding: 20px;
   border-radius: 10px;
   max-width: 800px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
 }
 
 
@@ -649,6 +657,16 @@ background: linear-gradient(90deg, green, #66ff8f , green);
     border: 3px solid #1c2963;
 }
         
+.pig-footer {
+  background: linear-gradient(135deg, #ffafcc, #ffc8dd);
+  color: #4b2e2e;
+  padding: 20px 0;
+  text-align: center;
+  font-family: 'Delius', cursive;
+
+  border-top: 3px solid #e29595;
+}
+
 /*ANIMATION*/
 
 .fade-in-section {
@@ -708,19 +726,19 @@ header h1 {
   flex-shrink: 0;                /* Prevent from shrinking too small */
 }
 
-  @media screen and (max-width: 800px) {
   .hamburger {
     display: block;
     margin-left: auto;
   }
 
   nav {
-    display: none; /* Hidden by default */
+    display: none; 
     flex-direction: column;
     align-items: flex-start;
     padding: 10px;
     background: #fff;
     width: 100%;
+
   }
 
   nav.show {
@@ -731,17 +749,18 @@ header h1 {
     flex-direction: column;
     width: 100%;
     padding-left: 0;
+    margin-top: 40px;
   }
 
   nav ul li {
     margin: 5px 10px;
+    
   }
 
+
+
   .box img {
-
-width: 70%
-
-
+    width: 70%
   }
   .card-container {
     flex-direction: column;
@@ -752,6 +771,10 @@ width: 70%
     width: 90%;
     max-width: 300px;
   }
+  
+
+  
+ 
 
   .breedGrid {
     display: flex;
@@ -777,7 +800,7 @@ width: 70%
 #imgContainer {
   position: relative;
   width: 100%;
-  height: 500px; /* or however tall your images are */
+height: 200px;
 }
 
 .breedImage {
@@ -785,7 +808,8 @@ width: 70%
   top: 0;
   left: 0;
   object-fit: cover;
-  max-width: 300px;
+  max-width: 200px;
+  height: 100%;
   opacity: 0;              
   transition: opacity 0.5s ease;
 }
@@ -830,5 +854,23 @@ width: 70%
     font-size: 1.5rem;
     top: 30%;
   }
-}
+
+
+   .instruction-parent {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .instruction-div1,
+  .instruction-div2,
+  .instruction-div3 {
+    grid-column: auto;
+    grid-row: auto;
+    width: 90%;
+    margin: auto;
+  }
+
+  .mobilepage {  
+    display: none;
+  }
 }
