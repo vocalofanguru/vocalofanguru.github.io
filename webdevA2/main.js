@@ -298,7 +298,7 @@ let pipeSpawnTimer = 0;
 let lastFrameTime = null; // Track last frame timestamp
 let flapStrength = -8;
 if (window.innerWidth < 800) {
-  gravity = 0.1;        
+  gravity = 0.25;        
 } // 
 
 // Create pipes for top and bottom
