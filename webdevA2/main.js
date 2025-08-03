@@ -297,11 +297,7 @@ let pipes = [];
 let pipeSpawnTimer = 0;
 let lastFrameTime = null; // Track last frame timestamp
 let flapStrength = -8;
-if (window.innerWidth < 800) {
-  gravity = 0.35;        
-} // 
-
-// Create pipes for top and bottom
+// Create a pair of pipes
 function createPipePair() {
   const topPipe = document.createElement("div");
   const bottomPipe = document.createElement("div");
@@ -314,7 +310,7 @@ function createPipePair() {
   topPipe.style.top = "0px";
   topPipe.style.left = "400px";
 
-  bottomPipe.style.height = (600 - pipeHeight - pipeGap) + "px"; // so that all gaps are same sized and won't risk getting gaps impossible to phase through
+  bottomPipe.style.height = (600 - pipeHeight - pipeGap) + "px";
   bottomPipe.style.bottom = "0px";
   bottomPipe.style.left = "400px";
 
@@ -327,12 +323,12 @@ function createPipePair() {
 function gameLoop(timestamp) {
   if (!gameStarted || isGameOver) return;
 
-  // dt ensures things move slowly regardless of framerate
   if (!lastFrameTime) lastFrameTime = timestamp;
-  const deltaTime = timestamp - lastFrameTime; 
+  const deltaTime = timestamp - lastFrameTime; // ms elapsed since last frame
   lastFrameTime = timestamp;
-  const deltaSeconds = deltaTime / 1000;
-  
+
+  const deltaSeconds = deltaTime / 1000; // convert to seconds
+
   // Physics: update velocity and position
   velocity += gravity;
   flyingPigY += velocity;
@@ -348,9 +344,6 @@ function gameLoop(timestamp) {
 
   // Move pipes left at 120 px/sec
   const pipeSpeed = 120;
-  if (window.innerWidth < 800) {
-  pipeSpeed = 180; // faster on mobile
-}
 
   for (let i = 0; i < pipes.length; i++) {
     let pipe = pipes[i];
@@ -397,9 +390,10 @@ function gameLoop(timestamp) {
 
 function flap() {
   if (gameStarted && !isGameOver) {
-    velocity = flapStrength;
+    velocity = -8;
   }
 }
+
 // Controls
 document.addEventListener('keydown', function (kbEvt) {
   if (kbEvt.code === "Space") {
@@ -441,8 +435,6 @@ document.getElementById("restart-button").addEventListener("click", function () 
   
   gameLoop(performance.now());
 });
-
-
 // This isnt part of the rubrics but i wanted to try it out
   var backToTopBtn = document.getElementById("backToTopBtn");
 
