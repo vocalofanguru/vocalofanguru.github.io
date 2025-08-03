@@ -327,8 +327,9 @@ function createPipePair() {
 function gameLoop(timestamp) {
   if (!gameStarted || isGameOver) return;
 
+  // dt ensures things move slowly regardless of frame rate
   if (!lastFrameTime) lastFrameTime = timestamp;
-  const deltaTime = timestamp - lastFrameTime; // ms elapsed since last frame
+  const deltaTime = timestamp - lastFrameTime; 
   lastFrameTime = timestamp;
   const deltaSeconds = deltaTime / 1000;
   
@@ -347,6 +348,9 @@ function gameLoop(timestamp) {
 
   // Move pipes left at 120 px/sec
   const pipeSpeed = 120;
+  if (window.innerWidth < 800) {
+  pipeSpeed = 180; // faster on mobile
+}
 
   for (let i = 0; i < pipes.length; i++) {
     let pipe = pipes[i];
