@@ -5,17 +5,21 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=no">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" href="images/pigIcon.png">
+  <link rel="manifest" href="manifest.json">
   <title>Pigs!</title>
   <link rel="stylesheet" href="fonts/Delius-Regular.ttf">
   <link rel="stylesheet" href="style.css">
   <script src="main.js" defer></script>
 </head>
 <body>
+  <!-- startup screen that shows up upon refresh/first visit -->
   <div id="startup-screen">
-    <h1>The wonderful world of PIGS!</h1>
-  </div>
+    <h1 class="startupHeader">The wonderful world of PIGS!</h1>
+    <!-- THIS IS MY CSS SPRITE!!-->
+    <div class="pigLoadingSprite"> </div>
+  </div> 
+        <!-- header -->
 <header>
         <h1>All About Pigs</h1>
         <div class="FS-buttons">
@@ -24,20 +28,22 @@
         </div>
         <button id="hamburger" class="hamburger">&#9776;</button> 
 </header>
+        <!-- nav bar -->
   <nav>
     <ul>
       <li><button id="page1btn">Main</button></li>
       <li><button id="page2btn">Pig Breeds</button></li>
-      <li><button id="page3btn">Usage</button></li>
+      <li><button id="page3btn">Purpose</button></li>
       <li><button id="page4btn">Arcade</button></li>
     </ul>
   </nav>
   <main id="pagecontainer">
 
+        <!-- first page of the site which is the default page -->
     <section class="page" id="page1">
         <div class="bannerWrapper">
             <img src="Images/pigBanner.png" class="bannerphoto" alt="banner">
-            <h1 class="inBanner">page 1 content</h1>
+            <h1 class="inBanner">Pigs: Underappreciated!</h1>
         </div>
                           <h1 class="headers fade-in-section"> Did you know? </h1>
                           <div class="box fade-in-section"> Pigs are among the smartest animals in the world. Their high intelligence 
@@ -51,21 +57,21 @@
 
                           <h1 class="headers fade-in-section">Representation of Pigs in Media!                        </h1>
                               <section class="card-container">
-                                  <article class="card fade-in-section" onclick="flipCard(this)">
-                                    <div class="card-inner">
-                                      <div class="card-front">
-                                        <h2>TV Shows</h2>
-                                        <p>Click to learn more!</p>
-                                      </div>
-                                      <div class="card-back">
-                                        <h3>Cartoons</h3>
-                                        <p>Found in Cartoons such as Peppa Pig as the Main focus!</p>
-                                                  <img src="Images/Peppa.png" alt="Peppa">
-                                      </div>
-                                    </div>
-                                  </article>
+                               <article class="card fade-in-section">
+                                <div class="card-inner">
+                                  <div class="card-front">
+                                    <h2>TV Shows</h2>
+                                    <p>Click to learn more!</p>
+                                  </div>
+                                  <div class="card-back">
+                                    <h3>Cartoons</h3>
+                                    <p>Found in Cartoons such as Peppa Pig as the Main focus!</p>
+                                    <img src="Images/Peppa.png" alt="Peppa">
+                                  </div>
+                                </div>
+                              </article>
 
-                                  <article class="card fade-in-section" onclick="flipCard(this)">
+                                  <article class="card fade-in-section">
                                     <div class="card-inner">
                                       <div class="card-front">
                                         <h2>Chinese Zodiac</h2>
@@ -80,7 +86,7 @@
                                     </div>
                                   </article>
 
-                                  <article class="card fade-in-section" onclick="flipCard(this)">
+                                  <article class="card fade-in-section">
                                     <div class="card-inner">
                                       <div class="card-front">
                                         <h2>Animal Farm</h2>
@@ -120,16 +126,16 @@
                                  </h1>
                                  <img src="Images/QRCode.png" class="fade-in-section" alt="QRCode">
                                 </div>
-                                
+                               <div class="gap"> </div>
     </section>
 
  
 
-
+        <!-- second section of the site, breed -->
     <section class="page" id="page2">
               <div class="bannerWrapper">
                   <img src="Images/pigBanner.png" class="bannerphoto" alt="banner">
-                  <h1 class="inBanner">page 2 content</h1>
+                  <h1 class="inBanner">The Perfect Pig!</h1>
               </div>
 
               <h1 class="headers"> Different Breeds!</h1>
@@ -207,37 +213,57 @@
                       </div>
                 </div>
             </div>
-                  <h1 class="headers"> What breed is suitable for me? </h1>
+                  <h1 class="headers fade-in-section"> What breed is suitable for me? </h1>
                   <div class="whichbreed">
-                      <div class="whichbreed1">Every person has it's perfect breed!
-                          Pigs such as Hampshires and Yorkshires are solid pigs for 
-
+                      <div class="whichbreed1 fade-in-section">
+                        Every person has their perfect pig breed!  
+                        Pigs such as Hampshires and Yorkshires are solid pigs for a variety of people, thanks to their friendly nature, as well as their manageable size.  
+                        Hampshire pigs, known for their distinctive black bodies with a white belt, are ideal for active owners who enjoy working closely with intelligent, energetic animals. They’re hardy, adaptable, and make excellent companions on small farms or hobby homesteads.  
+                        Yorkshire pigs, on the other hand, are gentle giants that are great for families or first-time pig owners. They are sociable, easy to handle, and have a calm temperament that makes them especially suitable for people who value a relaxed environment.  
+                        <br/> <br/>
+                        If you're someone who wants a more exotic or visually striking breed, consider a Gloucestershire Old Spot, who are known for their spotted coats and affectionate personality, they’re perfect for pig lovers who enjoy nurturing and bonding.  
+                        Whether you’re hands-on and energetic or calm and nurturing, there’s a pig breed that matches your lifestyle perfectly. Explore and discover your porcine soulmate!
                       </div>
-                      <div class="whichbreed2">2</div>
-                      <div class="whichbreed3">3</div>
+                      <div class="whichbreed2 fade-in-section"><img src="Images/PigHouse1.png" alt="pighouse1"></div>
+                      <div class="whichbreed3 fade-in-section" ><img src="Images/PigHouse2.png" alt="pighouse2"></div>
                   </div>
+                  <div class="gap"> </div>
     
     </section>
 
 
 
-
+        <!-- third page for the site -->
     <section class="page " id="page3">
         <div class="bannerWrapper">
             <img src="Images/pigBanner.png" class="bannerphoto" alt="bannerphoto">
-            <h1 class="inBanner">page 3 content</h1>
+            <h1 class="inBanner">More than useful!</h1>
         </div>
-                  <h1 class="headers"> Pigs are more than just meat! </h1>
+                  <h1 class="headers fade-in-section"> Pigs are more than just meat! </h1>
+                         <div class="box fade-in-section"> Pigs are some of the most capable animals in the Truffle Hunting business,
+                          being on par with canines. In fact, there is even a species of pig labelled as the "Truffle Hog", due to how
+                          well renowned they are for being able to sniff out truffle really easily! This is one of the many different skills 
+                          that pigs have that majority of animals do not.
+                             <img src="Images/TruffleHuntingPig.png" alt="TrufflePig">
+                          </div>
+                    <h1 class="headers fade-in-section"> All the different ways pigs can be useful! </h1>
+                          <button id="addBtn" class="ARbtns fade-in-section">Add!</button>
+                          <button id="remBtn" class="ARbtns fade-in-section">Remove All</button>
+                          <section id="dynamicArea">
+                          </section>
+
+                          <div class="gap"> </div>
+
 
                 
 
     </section>
 
-
+        <!-- arcade -->
      <section class="page" id="page4">
       <div class="bannerWrapper">
             <img src="Images/pigBanner.png" class="bannerphoto" alt="bannerphoto">
-            <h1 class="inBanner">page 3 content</h1>
+            <h1 class="inBanner">That famous saying...</h1>
         </div>
                   <h1 class="headers fade-in-section"> "Pigs can't fly!" They said... </h1>
                     <div id="game-container">
@@ -282,7 +308,7 @@
      </section>
      <footer class="pig-footer">
   <div class="pig-footer-content">
-    <p>All About Pigs! © 2025</p>
+    <p>All About Pigs! by Pun Yi © 2025</p>
 
   </div>
 </footer>

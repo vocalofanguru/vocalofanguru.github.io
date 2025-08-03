@@ -1,12 +1,13 @@
  /*   CHECK-LIST FOR SELF
  timed events - startup screen
  select DOM (document.queryselector) - usage of buttons
- append child - Pigs Can Fly minigame
  conditions & loops - form, toggling, game etc.
  form data - pig life cycle quiz
  Ability to use audio - pigsnort.mp3 played when clicked
- Dynamic Content - adding transitions thru classes
-
+ Dynamic Content - adding an element
+ Responsive Web menu for Mobile - hamburger icon 
+ Interactivity thru moving objects around - Pigs can fly game
+ reset status without refreshing - form & minigame,  etc
  */ 
  
  window.addEventListener("load", function () {
@@ -61,7 +62,7 @@ show(4);
 });
 
 
-// to spwn//
+//Responsive Web Menu for Mobile//
 var hamburger = document.getElementById('hamburger');
 var nav = document.querySelector('nav');
 
@@ -79,6 +80,8 @@ var appearOptions = {
   rootMargin: "0px 0px -50px 0px"
 };
 
+// intersectionobserver is based off scroll distance. hence class
+// will be added when a certain threshold is met
 var appearOnScroll = new IntersectionObserver(function (entries, observer) {
   entries.forEach(function (entry) {
     if (!entry.isIntersecting) return;
@@ -92,16 +95,38 @@ for (var i = 0; i < faders.length; i++) {
 }
 
 
-function flipCard(cardElement) {
-  cardElement.classList.toggle('flip');
+// flipping card 
+var cards = document.querySelectorAll('.card');
+
+// Loop over all card elements
+for (var i = 0; i < cards.length; i++) {
+  addFlipHandler(cards[i]);
 }
 
+// Define the handler function outside the loop
+function addFlipHandler(cardElement) {
+  cardElement.addEventListener('click', function () {
+    flipCard(cardElement);
+  }, false);
+}
+
+// Flip function — also declared outside loop
+function flipCard(cardElement) {
+  if (cardElement.classList.contains('flip')) {
+    cardElement.classList.remove('flip');
+  } else {
+    cardElement.classList.add('flip');
+  }
+}
+
+// for pig snout to make a noise when clicked on
 const pigNose=document.querySelector("#Hoverpig");
 const pigSnortAudio = new Audio("audio/PigSnort.mp3");
 pigNose.addEventListener("click", function () {
 pigSnortAudio.play();
 });
 
+// pig quiz 
 document.getElementById("pigquiz-form").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -109,6 +134,7 @@ document.getElementById("pigquiz-form").addEventListener("submit", function (e) 
   var correctAnswer = 4;
   var feedback = document.getElementById("pigquiz-feedback");
 
+  // if else condition based on the difference of the user's input to the actual answer
   if (userGuess === correctAnswer) {
     feedback.innerHTML = "<p>Correct! There are 4 stages in a pig's life cycle: <br/> Piglet, Weaned pig, Sow, and Farrowing Sow!</p>";
     feedback.style.color = "green";
@@ -131,7 +157,7 @@ document.getElementById("pigquiz-form").addEventListener("submit", function (e) 
 
   // Create new image element
   const pigImage = document.createElement("img");
-  pigImage.src = "images/pig_life_cycle.png";  // Make sure the path is correct
+  pigImage.src = "Images/pig_life_cycle.png";  
   pigImage.alt = "lifecycle";
   pigImage.id = "pigquiz-image";
   pigImage.className = "pigquiz-image";
@@ -194,6 +220,7 @@ Breed5btn.addEventListener("click", function () {
 show(1);
 showPig(1);
 
+//Enter and Exit fullscreen
 const btnFS=document.querySelector("#btnFS");
 const btnWS=document.querySelector("#btnWS");
 btnFS.addEventListener("click",enterFullscreen);
@@ -205,12 +232,59 @@ function exitFullscreen() {
 document.exitFullscreen();
 }
 
+
+//array
+const pigUses = [
+  { name: "Truffle Hunting", color: "pink" },
+  { name: "Insulin Production", color: "lightgreen" },
+  { name: "Weed grazing", color: "salmon" },
+  { name: "Waste disposals", color: "lavender" },
+  { name: "Household Pets", color: "lightblue" }
+];
+
+const dynamicArea = document.querySelector("#dynamicArea");
+let idCount = 0;
+
+const addBtn = document.querySelector("#addBtn");
+const remBtn = document.querySelector("#remBtn");
+
+// click on add btn to add new pig usage
+addBtn.addEventListener("click", addElement);
+
+// Clear all pig tiles
+remBtn.addEventListener("click", function () {
+  dynamicArea.replaceChildren();
+});
+
+function addElement() {
+  const pig = pigUses[idCount % pigUses.length]; // cycle through breeds
+
+  const newDiv = document.createElement('div');
+  newDiv.id = 'pig-id-' + (idCount++);
+  newDiv.className = 'pig-tile';
+  newDiv.style.background = pig.color;
+
+  newDiv.innerHTML = `<strong>${pig.name}</strong><br>Click to remove!`;
+  dynamicArea.appendChild(newDiv);
+}
+
+// Delegate clicks to remove pigs
+dynamicArea.addEventListener("click", function (evt) {
+  const sender = evt.target;
+  if (sender.classList.contains("pig-tile")) {
+    sender.remove();
+  }
+});
+
+
 const flyingPig = document.getElementById("flyingpig");
 const scoreDisplay = document.getElementById("score");
 const startScreen = document.getElementById("start-screen");
 const startButton = document.getElementById("start-button");
 const gameContainer = document.getElementById("game-container");
 
+
+//  set varaiables for game
 let flyingPigY = 250;
 let gravity = 0.5;
 let velocity = 0;
@@ -221,11 +295,11 @@ let gameStarted = false;
 let pipes = [];
 let pipeSpawnTimer = 0;
 
-// Create a new pair of pipes
+// Create a pair of pipes
 function createPipePair() {
   const topPipe = document.createElement("div");
   const bottomPipe = document.createElement("div");
-  const pipeHeight = Math.floor(Math.random() * 200) + 100;
+  const pipeHeight = Math.floor(Math.random() * 200) + 100; //randomise how the pipes r gonna spawn
 
   topPipe.classList.add("pipe");
   bottomPipe.classList.add("pipe");
@@ -238,15 +312,18 @@ function createPipePair() {
   bottomPipe.style.bottom = "0px";
   bottomPipe.style.left = "400px";
 
+  // adding new elements
   gameContainer.appendChild(topPipe);
   gameContainer.appendChild(bottomPipe);
 
   pipes.push({ top: topPipe, bottom: bottomPipe, x: 400, height: pipeHeight });
 }
 
+
 function gameLoop() {
   if (!gameStarted || isGameOver) return;
 
+// game physics for pig to fly smoothly to flap its wings
   velocity += gravity;
   flyingPigY += velocity;
   flyingPig.style.top = flyingPigY + "px";
@@ -263,6 +340,8 @@ function gameLoop() {
     pipe.top.style.left = pipe.x + "px";
     pipe.bottom.style.left = pipe.x + "px";
 
+
+    //if condition where pig hits pipe
     if (
       pipe.x < 120 && pipe.x > 80 &&
       (flyingPigY < pipe.height || flyingPigY > pipe.height + pipeGap)
@@ -273,11 +352,13 @@ function gameLoop() {
       return;
     }
 
+    // pipe threshold when pig phases thru
     if (pipe.x === 80) {
       score++;
       scoreDisplay.textContent = score;
     }
 
+    // delete pipe after it disappears offscreen
     if (pipe.x < -60) {
       gameContainer.removeChild(pipe.top);
       gameContainer.removeChild(pipe.bottom);
@@ -286,18 +367,17 @@ function gameLoop() {
     }
   }
 
+  // to ensure that the pig cannot go out of bounds and instead loses
   if (flyingPigY < 0 || flyingPigY > 560) {
     isGameOver = true;
     document.getElementById("final-score").textContent = score;
     document.getElementById("game-over-screen").style.display = "flex";
     return;
   }
-
-
-
   requestAnimationFrame(gameLoop);
 }
 
+// a sense of physics while flying
 function flap() {
   if (gameStarted && !isGameOver) {
     velocity = -8;
@@ -307,11 +387,12 @@ function flap() {
 // Controls
 document.addEventListener('keydown', function (kbEvt) {
 //kbEvt: an event object passed to callback function
-console.log(kbEvt); //see what is returned
+console.log(kbEvt); // debugging
+// space bar to move
 if (kbEvt.code === "Space"){
 if (gameStarted && !isGameOver) {
         kbEvt.preventDefault(); // only prevent scroll during game
-   flap();
+         flap();
 }
 
 }
@@ -328,6 +409,7 @@ startButton.addEventListener("click", function () {
   gameLoop();
 });
 
+// restart button, reset most variables to default
 document.getElementById("restart-button").addEventListener("click", function () {
   for (var i = 0; i < pipes.length; i++) {
     gameContainer.removeChild(pipes[i].top);
