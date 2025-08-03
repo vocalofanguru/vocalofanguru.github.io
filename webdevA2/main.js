@@ -265,11 +265,12 @@ function addElement() {
   newDiv.className = 'pig-tile';
   newDiv.style.background = pig.color;
 
-  newDiv.innerHTML = `<strong>${pig.name}</strong><br>Click to remove!`;
-  dynamicArea.appendChild(newDiv);
+  //'template literal syntax' is only available in ES6
+  newDiv.innerHTML = '<strong>' + pig.name + '</strong><br>Click to remove!';
+  dynamicArea.appendChild(newDiv); 
 }
 
-// Delegate clicks to remove pigs
+// remove tile
 dynamicArea.addEventListener("click", function (evt) {
   const sender = evt.target;
   if (sender.classList.contains("pig-tile")) {
@@ -287,6 +288,9 @@ const gameContainer = document.getElementById("game-container");
 // Variables for game state
 let flyingPigY = 250;
 let gravity = 0.5;
+if (window.innerWidth < 800) {
+  gravity = 0.3; // too fast on mobile, so i made it slower
+}
 let velocity = 0;
 let isGameOver = false;
 let score = 0;
@@ -296,7 +300,7 @@ let pipes = [];
 let pipeSpawnTimer = 0;
 let lastFrameTime = null; // Track last frame timestamp
 
-// Create a pair of pipes
+// Create pipes for top and bottom
 function createPipePair() {
   const topPipe = document.createElement("div");
   const bottomPipe = document.createElement("div");
@@ -309,7 +313,7 @@ function createPipePair() {
   topPipe.style.top = "0px";
   topPipe.style.left = "400px";
 
-  bottomPipe.style.height = (600 - pipeHeight - pipeGap) + "px";
+  bottomPipe.style.height = (600 - pipeHeight - pipeGap) + "px"; // so that all gaps are same sized and won't risk getting gaps impossible to phase through
   bottomPipe.style.bottom = "0px";
   bottomPipe.style.left = "400px";
 
@@ -436,9 +440,17 @@ document.getElementById("restart-button").addEventListener("click", function () 
 });
 
 
-// This isnt part of the rubrucs but i wanted to try it out
-  const backToTopBtn = document.getElementById("backToTopBtn");
+// This isnt part of the rubrics but i wanted to try it out
+  var backToTopBtn = document.getElementById("backToTopBtn");
 
-  backToTopBtn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  backToTopBtn.addEventListener("click", function () {
+    // Fallback smooth scroll for older browsers
+    var scrollToTop = window.setInterval(function () {
+      var pos = window.pageYOffset;
+      if (pos > 0) {
+        window.scrollTo(0, pos - 50); // scroll up 50px per frame
+      } else {
+        clearInterval(scrollToTop);
+      }
+    }, 10); // every 10ms
   });
