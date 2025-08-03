@@ -298,7 +298,7 @@ let pipeSpawnTimer = 0;
 let lastFrameTime = null; // Track last frame timestamp
 let flapStrength = -8;
 if (window.innerWidth < 800) {
-  gravity = 0.25;        
+  gravity = 0.35;        
 } // 
 
 // Create pipes for top and bottom
@@ -327,7 +327,7 @@ function createPipePair() {
 function gameLoop(timestamp) {
   if (!gameStarted || isGameOver) return;
 
-  // dt ensures things move slowly regardless of frame rate
+  // dt ensures things move slowly regardless of framerate
   if (!lastFrameTime) lastFrameTime = timestamp;
   const deltaTime = timestamp - lastFrameTime; 
   lastFrameTime = timestamp;
@@ -349,7 +349,7 @@ function gameLoop(timestamp) {
   // Move pipes left at 120 px/sec
   const pipeSpeed = 120;
   if (window.innerWidth < 800) {
-  pipeSpeed = 400; // faster on mobile
+  pipeSpeed = 180; // faster on mobile
 }
 
   for (let i = 0; i < pipes.length; i++) {
