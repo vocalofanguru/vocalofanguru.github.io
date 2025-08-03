@@ -233,7 +233,7 @@ document.exitFullscreen();
 }
 
 
-//array
+//array for the divs that can be output
 const pigUses = [
   { name: "Truffle Hunting", color: "pink" },
   { name: "Insulin Production", color: "lightgreen" },
@@ -242,6 +242,7 @@ const pigUses = [
   { name: "Household Pets", color: "lightblue" }
 ];
 
+//dynamic content
 const dynamicArea = document.querySelector("#dynamicArea");
 let idCount = 0;
 
@@ -283,8 +284,7 @@ const startScreen = document.getElementById("start-screen");
 const startButton = document.getElementById("start-button");
 const gameContainer = document.getElementById("game-container");
 
-
-//  set varaiables for game
+// Variables for game state
 let flyingPigY = 250;
 let gravity = 0.5;
 let velocity = 0;
@@ -294,12 +294,13 @@ let pipeGap = 150;
 let gameStarted = false;
 let pipes = [];
 let pipeSpawnTimer = 0;
+let lastFrameTime = null; // Track last frame timestamp
 
 // Create a pair of pipes
 function createPipePair() {
   const topPipe = document.createElement("div");
   const bottomPipe = document.createElement("div");
-  const pipeHeight = Math.floor(Math.random() * 200) + 100; //randomise how the pipes r gonna spawn
+  const pipeHeight = Math.floor(Math.random() * 200) + 100;
 
   topPipe.classList.add("pipe");
   bottomPipe.classList.add("pipe");
@@ -312,36 +313,44 @@ function createPipePair() {
   bottomPipe.style.bottom = "0px";
   bottomPipe.style.left = "400px";
 
-  // adding new elements
   gameContainer.appendChild(topPipe);
   gameContainer.appendChild(bottomPipe);
 
   pipes.push({ top: topPipe, bottom: bottomPipe, x: 400, height: pipeHeight });
 }
 
-
-function gameLoop() {
+function gameLoop(timestamp) {
   if (!gameStarted || isGameOver) return;
 
-// game physics for pig to fly smoothly to flap its wings
+  if (!lastFrameTime) lastFrameTime = timestamp;
+  const deltaTime = timestamp - lastFrameTime; // ms elapsed since last frame
+  lastFrameTime = timestamp;
+
+  const deltaSeconds = deltaTime / 1000; // convert to seconds
+
+  // Physics: update velocity and position
   velocity += gravity;
   flyingPigY += velocity;
   flyingPig.style.top = flyingPigY + "px";
 
-  pipeSpawnTimer++;
-  if (pipeSpawnTimer > 90) {
+  pipeSpawnTimer += deltaTime;
+
+  // Spawn pipes every 1500ms
+  if (pipeSpawnTimer > 1500) {
     createPipePair();
     pipeSpawnTimer = 0;
   }
 
-  for (var i = 0; i < pipes.length; i++) {
-    var pipe = pipes[i];
-    pipe.x -= 2;
+  // Move pipes left at 120 px/sec
+  const pipeSpeed = 120;
+
+  for (let i = 0; i < pipes.length; i++) {
+    let pipe = pipes[i];
+    pipe.x -= pipeSpeed * deltaSeconds;
     pipe.top.style.left = pipe.x + "px";
     pipe.bottom.style.left = pipe.x + "px";
 
-
-    //if condition where pig hits pipe
+    // Collision detection
     if (
       pipe.x < 120 && pipe.x > 80 &&
       (flyingPigY < pipe.height || flyingPigY > pipe.height + pipeGap)
@@ -352,13 +361,13 @@ function gameLoop() {
       return;
     }
 
-    // pipe threshold when pig phases thru
-    if (pipe.x === 80) {
+    // Increase score when pipe crosses x = 80
+    if (pipe.x <= 80 && pipe.x + pipeSpeed * deltaSeconds > 80) {
       score++;
       scoreDisplay.textContent = score;
     }
 
-    // delete pipe after it disappears offscreen
+    // Remove pipes offscreen
     if (pipe.x < -60) {
       gameContainer.removeChild(pipe.top);
       gameContainer.removeChild(pipe.bottom);
@@ -367,17 +376,17 @@ function gameLoop() {
     }
   }
 
-  // to ensure that the pig cannot go out of bounds and instead loses
+  // Pig out of bounds check
   if (flyingPigY < 0 || flyingPigY > 560) {
     isGameOver = true;
     document.getElementById("final-score").textContent = score;
     document.getElementById("game-over-screen").style.display = "flex";
     return;
   }
+
   requestAnimationFrame(gameLoop);
 }
 
-// a sense of physics while flying
 function flap() {
   if (gameStarted && !isGameOver) {
     velocity = -8;
@@ -386,19 +395,13 @@ function flap() {
 
 // Controls
 document.addEventListener('keydown', function (kbEvt) {
-//kbEvt: an event object passed to callback function
-console.log(kbEvt); // debugging
-// space bar to move
-if (kbEvt.code === "Space"){
-if (gameStarted && !isGameOver) {
-        kbEvt.preventDefault(); // only prevent scroll during game
-         flap();
-}
-
-}
-
+  if (kbEvt.code === "Space") {
+    if (gameStarted && !isGameOver) {
+      kbEvt.preventDefault();
+      flap();
+    }
+  }
 });
-
 
 document.addEventListener("click", flap);
 
@@ -406,22 +409,36 @@ document.addEventListener("click", flap);
 startButton.addEventListener("click", function () {
   startScreen.style.display = "none";
   gameStarted = true;
-  gameLoop();
+  lastFrameTime = null; // Reset timer when starting
+  gameLoop(performance.now());
 });
 
-// restart button, reset most variables to default
+// Restart button logic
 document.getElementById("restart-button").addEventListener("click", function () {
+  // Remove pipes
   for (var i = 0; i < pipes.length; i++) {
     gameContainer.removeChild(pipes[i].top);
     gameContainer.removeChild(pipes[i].bottom);
   }
   pipes = [];
+
+  // Reset variables
   flyingPigY = 250;
   velocity = 0;
   score = 0;
   scoreDisplay.textContent = 0;
   isGameOver = false;
   pipeSpawnTimer = 0;
+  lastFrameTime = null;
   document.getElementById("game-over-screen").style.display = "none";
-  gameLoop();
+  
+  gameLoop(performance.now());
 });
+
+
+// This isnt part of the rubrucs but i wanted to try it out
+  const backToTopBtn = document.getElementById("backToTopBtn");
+
+  backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });

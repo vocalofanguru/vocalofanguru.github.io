@@ -20,10 +20,11 @@
   background: linear-gradient(#ffb7b7, #e293ff);
   color: white;
   display: flex;
+  flex-direction: column; 
   align-items: center;
   justify-content: center;
   font-size: 2rem;
-  z-index: 9999;
+  z-index: 9999; /*cover EVERYTHINGGGG*/
 }
 .fade-out {
   animation: fadeOut 1s forwards;
@@ -40,20 +41,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 
 .pigLoadingSprite {
-  display: inline-block;
-  margin-top: 20px;
-  background: url('Images/PigSprites.png') no-repeat;
   width: 64px;
   height: 48px;
+  background: url('Images/PigSprites.png') no-repeat;
   background-position-y: -144px;
-
   animation: pigWalk 0.6s steps(3) infinite;
-}
+  margin-top: 20px;
 
+  transform-origin: center;
+  transform: scale(1.7); /*I wanted to make the size of the sprite a little bigger */
+}
 @keyframes pigWalk {
   from { background-position-x: 0px; }
   to   { background-position-x: -192px; } 
@@ -96,6 +98,27 @@ header h1 {
 .FS-buttons {
   display: flex;
   gap: 10px;
+
+}
+
+#btnFS {
+    transition: all 0.3s ease;
+}
+
+#btnFS:hover {
+  background-color: #ff5d8f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 93, 143, 0.3);
+}
+
+#btnWS{
+    transition: all 0.3s ease;
+}
+
+#btnWS:hover {
+  background-color: #ff5d8f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 93, 143, 0.3);
 }
 
 header button {
@@ -200,7 +223,7 @@ nav ul li{display:inline;}
 
 h1, div  {
   color:#212121;
-  font-family: 'Delius';
+  font-family: 'Delius', sans-serif;
 }
 
 .bannerWrapper {
@@ -246,6 +269,7 @@ min-width: 100%;
   font-size: 1.2em;
   line-height: 1.6;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%
 }
 
 .card-container {
@@ -330,13 +354,14 @@ min-width: 100%;
 .pigquiz-title {
   text-align: center;
   margin-bottom: 15px;
-  font-family: 'Delius';
+  font-family: 'Delius', sans-serif;
 }
 
 .pigquiz-label {
   display: block;
   margin-top: 10px;
   font-weight: bold;
+  font-family: 'Delius', sans-serif;
 }
 
 .pigquiz-input {
@@ -357,6 +382,7 @@ min-width: 100%;
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
+  font-family: 'Delius', sans-serif;
 }
 
 .pigquiz-button:hover {
@@ -410,11 +436,11 @@ min-width: 100%;
 
 .breedGrid {
   display: grid;
-  grid-template-columns: repeat(2, auto); /* shrink to content width */
-  grid-template-rows: repeat(6, auto);    /* optional */
+  grid-template-columns: repeat(2, auto); 
+  grid-template-rows: repeat(6, auto);    
   gap: 20px;  
-  place-items: start center; /* vertically start, horizontally center */
-  margin: 0 auto;            /* center the grid itself */
+  place-items: start center; 
+  margin: 0 auto;            
   padding: 20px;
   max-width: 1000px;  
   justify-content: center;   
@@ -547,7 +573,7 @@ min-width: 100%;
     object-fit: cover;
 
 }
-
+/*SECTION 3 CSS*/
 #dynamicArea {
   display: flex;
   flex-wrap: wrap;
@@ -559,7 +585,7 @@ min-width: 100%;
   padding: 15px;
   border-radius: 10px;
   color: #333;
-  font-family: "Arial", sans-serif;
+  font-family: 'Delius', sans-serif;
   cursor: pointer;
   width: 190px;
   text-align: center;
@@ -737,6 +763,29 @@ background: linear-gradient(90deg, green, #66ff8f , green);
     border: 3px solid #1c2963;
 }
         
+/*Button to redirect to the top*/
+#backToTopBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  background-color: #ff7f7f;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 24px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#backToTopBtn:hover {
+  background-color: #ffffff;
+    color: #ff7f7f;
+  transform: scale(1.1);
+}
+ /* footer */
 .pig-footer {
   background: linear-gradient(135deg, #ffafcc, #ffc8dd);
   color: #4b2e2e;
@@ -749,8 +798,6 @@ background: linear-gradient(90deg, green, #66ff8f , green);
 
 .gap {
   height: 80px;
-
-
 }
 /*ANIMATION*/
 
@@ -790,7 +837,7 @@ background: linear-gradient(90deg, green, #66ff8f , green);
 }
 
 
-/* */
+/* viewport for devices below 800px in width */
 @media screen and (max-width: 800px) {
 .page {
 
@@ -816,6 +863,8 @@ header h1 {
   gap: 8px;                      
   flex-shrink: 0;              
 }
+
+
 
   .hamburger {
     display: block;
@@ -909,21 +958,40 @@ height: 200px;
   opacity: 1;              
   z-index: 1;
 }
+.whichbreed {
+  max-width: 1200px;   /* or whatever max width you want */
+  margin: 0 auto;     /* centers the container horizontally */
+  grid-template-columns: 1fr;  
+  grid-template-rows: auto;
+  gap: 12px;
 
-  .whichbreed {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-  }
+}
 
-  .whichbreed1,
-  .whichbreed2,
-  .whichbreed3 {
-    font-size: 1.2em;
+  .whichbreed1 {
     grid-column: auto;
     grid-row: auto;
-    width: 90%;
-    margin: auto;
+    padding: 20px;
+    font-size: 1.2em;
+    min-width: 90%;
+    width: 90%;           
+    max-width: 600px;     
+    justify-self: center;
   }
+
+.whichbreed2, .whichbreed3 {
+  grid-column: auto;
+  grid-row: auto;
+  border-width: 3px;
+  width: 90%;           
+  max-width: 350px;      
+  justify-self: center; 
+}
+.whichbreed2 img,
+.whichbreed3 img {
+  width: 100%;         
+  height: auto;        
+  object-fit: contain;
+}
 
   #game-container {
     max-width: 400px;

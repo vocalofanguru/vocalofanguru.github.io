@@ -7,7 +7,7 @@
   "theme_color": "#00FF00",
   "icons": [
     {
-      "src": "images/pigIcon.png",
+      "src": "Images/pigIcon.png",
       "sizes": "50x50",
       "type": "image/png"
     }
