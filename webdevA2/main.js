@@ -349,7 +349,7 @@ function gameLoop(timestamp) {
   // Move pipes left at 120 px/sec
   const pipeSpeed = 120;
   if (window.innerWidth < 800) {
-  pipeSpeed = 180; // faster on mobile
+  pipeSpeed = 400; // faster on mobile
 }
 
   for (let i = 0; i < pipes.length; i++) {
