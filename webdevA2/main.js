@@ -288,9 +288,6 @@ const gameContainer = document.getElementById("game-container");
 // Variables for game state
 let flyingPigY = 250;
 let gravity = 0.5;
-if (window.innerWidth < 800) {
-  gravity = 0.3; // too fast on mobile, so i made it slower
-}
 let velocity = 0;
 let isGameOver = false;
 let score = 0;
@@ -299,6 +296,10 @@ let gameStarted = false;
 let pipes = [];
 let pipeSpawnTimer = 0;
 let lastFrameTime = null; // Track last frame timestamp
+let flapStrength = -8;
+if (window.innerWidth < 800) {
+  gravity = 0.35;        
+} // 
 
 // Create pipes for top and bottom
 function createPipePair() {
@@ -329,9 +330,8 @@ function gameLoop(timestamp) {
   if (!lastFrameTime) lastFrameTime = timestamp;
   const deltaTime = timestamp - lastFrameTime; // ms elapsed since last frame
   lastFrameTime = timestamp;
-
-  const deltaSeconds = deltaTime / 1000; // convert to seconds
-
+  const deltaSeconds = deltaTime / 1000;
+  
   // Physics: update velocity and position
   velocity += gravity;
   flyingPigY += velocity;
@@ -393,10 +393,9 @@ function gameLoop(timestamp) {
 
 function flap() {
   if (gameStarted && !isGameOver) {
-    velocity = -8;
+    velocity = flapStrength;
   }
 }
-
 // Controls
 document.addEventListener('keydown', function (kbEvt) {
   if (kbEvt.code === "Space") {
